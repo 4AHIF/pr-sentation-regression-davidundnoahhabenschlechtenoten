@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="02Praesentation_files/libs/clipboard/clipboard.min.js"></script>
-<script src="02Praesentation_files/libs/quarto-html/tabby.min.js"></script>
-<script src="02Praesentation_files/libs/quarto-html/popper.min.js"></script>
-<script src="02Praesentation_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="02Praesentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="02Praesentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="02Praesentation_files/libs/quarto-html/quarto-syntax-highlighting-dark-9e15f8fb9e1f2f288bfbe28f6ca11029.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-9e15f8fb9e1f2f288bfbe28f6ca11029.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Noah &amp; David">
@@ -15,8 +15,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="02Praesentation_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="02Praesentation_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,13 +96,13 @@
     code span.vs { color: #e6db74; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="02Praesentation_files/libs/revealjs/dist/theme/quarto-d435f2b632adb41cf1c0fc51eb759037.css">
-  <link href="02Praesentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="02Praesentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="02Praesentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="02Praesentation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="02Praesentation_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="02Praesentation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d435f2b632adb41cf1c0fc51eb759037.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -242,49 +242,49 @@ Noah &amp; David
 <section id="code-daten-vorbereiten" class="slide level2">
 <h2>Code: Daten vorbereiten</h2>
 <p>Lass uns das in Python mit <code>scikit-learn</code> umsetzen. <em>(Klicke weiter, um die einzelnen Schritte im Code zu markieren!)</em></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-line-numbers="1-2|4-6|8-10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># 1. Bibliotheken importieren</span></span>
-<span id="cb1-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb1-5"><a href=""></a></span>
-<span id="cb1-6"><a href=""></a><span class="co"># 2. Beispieldaten generieren</span></span>
-<span id="cb1-7"><a href=""></a><span class="co"># X muss für scikit-learn ein 2D-Array sein!</span></span>
-<span id="cb1-8"><a href=""></a>X <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb1-9"><a href=""></a>y <span class="op">=</span> np.array([<span class="fl">2.1</span>, <span class="fl">3.8</span>, <span class="fl">5.2</span>, <span class="fl">7.1</span>, <span class="fl">8.9</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-line-numbers="1-2|4-6|8-10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># 1. Bibliotheken importieren</span></span>
+<span id="cb1-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a><span class="co"># 2. Beispieldaten generieren</span></span>
+<span id="cb1-7"><a></a><span class="co"># X muss für scikit-learn ein 2D-Array sein!</span></span>
+<span id="cb1-8"><a></a>X <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb1-9"><a></a>y <span class="op">=</span> np.array([<span class="fl">2.1</span>, <span class="fl">3.8</span>, <span class="fl">5.2</span>, <span class="fl">7.1</span>, <span class="fl">8.9</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="code-modell-trainieren" class="slide level2">
 <h2>Code: Modell trainieren</h2>
 <p>Nun bauen wir das Regressionsmodell. Jeder Klick zeigt einen neuen logischen Schritt.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-line-numbers="1-2|4-5|7-8|10-12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="co"># 1. Modell instanziieren</span></span>
-<span id="cb2-2"><a href=""></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a><span class="co"># 2. Modell mit unseren Daten trainieren</span></span>
-<span id="cb2-5"><a href=""></a>model.fit(X, y)</span>
-<span id="cb2-6"><a href=""></a></span>
-<span id="cb2-7"><a href=""></a><span class="co"># 3. Vorhersagen (die Gerade) berechnen</span></span>
-<span id="cb2-8"><a href=""></a>y_pred <span class="op">=</span> model.predict(X)</span>
-<span id="cb2-9"><a href=""></a></span>
-<span id="cb2-10"><a href=""></a><span class="co"># 4. Die gelernten Parameter auslesen</span></span>
-<span id="cb2-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Steigung (beta_1): </span><span class="sc">{</span>model<span class="sc">.</span>coef_[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb2-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Y-Achsenabschnitt (beta_0): </span><span class="sc">{</span>model<span class="sc">.</span>intercept_<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-line-numbers="1-2|4-5|7-8|10-12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># 1. Modell instanziieren</span></span>
+<span id="cb2-2"><a></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="co"># 2. Modell mit unseren Daten trainieren</span></span>
+<span id="cb2-5"><a></a>model.fit(X, y)</span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a><span class="co"># 3. Vorhersagen (die Gerade) berechnen</span></span>
+<span id="cb2-8"><a></a>y_pred <span class="op">=</span> model.predict(X)</span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a><span class="co"># 4. Die gelernten Parameter auslesen</span></span>
+<span id="cb2-11"><a></a><span class="bu">print</span>(<span class="ss">f"Steigung (beta_1): </span><span class="sc">{</span>model<span class="sc">.</span>coef_[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb2-12"><a></a><span class="bu">print</span>(<span class="ss">f"Y-Achsenabschnitt (beta_0): </span><span class="sc">{</span>model<span class="sc">.</span>intercept_<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="code-visualisierung" class="slide level2">
 <h2>Code: Visualisierung</h2>
 <p>Wie plotten wir die Ergebnisse ansprechend?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-line-numbers="1-2|4-5|7-10|12-13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Echte Datenpunkte als Scatterplot</span></span>
-<span id="cb3-2"><a href=""></a>plt.scatter(X, y, color<span class="op">=</span><span class="st">'cyan'</span>, label<span class="op">=</span><span class="st">'Echte Daten'</span>)</span>
-<span id="cb3-3"><a href=""></a></span>
-<span id="cb3-4"><a href=""></a><span class="co"># Die berechnete Regressionsgerade</span></span>
-<span id="cb3-5"><a href=""></a>plt.plot(X, y_pred, color<span class="op">=</span><span class="st">'magenta'</span>, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Regression'</span>)</span>
-<span id="cb3-6"><a href=""></a></span>
-<span id="cb3-7"><a href=""></a><span class="co"># Achsenbeschriftungen und Titel</span></span>
-<span id="cb3-8"><a href=""></a>plt.xlabel(<span class="st">'Unabhängige Variable (X)'</span>)</span>
-<span id="cb3-9"><a href=""></a>plt.ylabel(<span class="st">'Abhängige Variable (Y)'</span>)</span>
-<span id="cb3-10"><a href=""></a>plt.title(<span class="st">'Unsere erste lineare Regression'</span>)</span>
-<span id="cb3-11"><a href=""></a></span>
-<span id="cb3-12"><a href=""></a><span class="co"># Legende anzeigen und Plot generieren</span></span>
-<span id="cb3-13"><a href=""></a>plt.legend()</span>
-<span id="cb3-14"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-line-numbers="1-2|4-5|7-10|12-13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Echte Datenpunkte als Scatterplot</span></span>
+<span id="cb3-2"><a></a>plt.scatter(X, y, color<span class="op">=</span><span class="st">'cyan'</span>, label<span class="op">=</span><span class="st">'Echte Daten'</span>)</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a><span class="co"># Die berechnete Regressionsgerade</span></span>
+<span id="cb3-5"><a></a>plt.plot(X, y_pred, color<span class="op">=</span><span class="st">'magenta'</span>, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Regression'</span>)</span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a><span class="co"># Achsenbeschriftungen und Titel</span></span>
+<span id="cb3-8"><a></a>plt.xlabel(<span class="st">'Unabhängige Variable (X)'</span>)</span>
+<span id="cb3-9"><a></a>plt.ylabel(<span class="st">'Abhängige Variable (Y)'</span>)</span>
+<span id="cb3-10"><a></a>plt.title(<span class="st">'Unsere erste lineare Regression'</span>)</span>
+<span id="cb3-11"><a></a></span>
+<span id="cb3-12"><a></a><span class="co"># Legende anzeigen und Plot generieren</span></span>
+<span id="cb3-13"><a></a>plt.legend()</span>
+<span id="cb3-14"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="modellbewertung-ist-die-gerade-gut" class="slide level2">
 <h2>Modellbewertung: Ist die Gerade gut?</h2>
@@ -296,12 +296,12 @@ Noah &amp; David
 <li><span class="math inline">\(R^2\)</span> gibt an, wie viel Prozent der Streuung von <span class="math inline">\(Y\)</span> durch <span class="math inline">\(X\)</span> erklärt werden.</li>
 <li><strong>Wertebereich:</strong> <span class="math inline">\(0 \le R^2 \le 1\)</span> (Je näher an 1, desto besser!)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-code-line-numbers="1-2|4-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># r2_score Funktion importieren</span></span>
-<span id="cb4-2"><a href=""></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
-<span id="cb4-3"><a href=""></a></span>
-<span id="cb4-4"><a href=""></a><span class="co"># R-Quadrat berechnen und ausgeben</span></span>
-<span id="cb4-5"><a href=""></a>r2 <span class="op">=</span> r2_score(y, y_pred)</span>
-<span id="cb4-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Bestimmtheitsmaß R^2: </span><span class="sc">{</span>r2<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-code-line-numbers="1-2|4-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># r2_score Funktion importieren</span></span>
+<span id="cb4-2"><a></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a><span class="co"># R-Quadrat berechnen und ausgeben</span></span>
+<span id="cb4-5"><a></a>r2 <span class="op">=</span> r2_score(y, y_pred)</span>
+<span id="cb4-6"><a></a><span class="bu">print</span>(<span class="ss">f"Bestimmtheitsmaß R^2: </span><span class="sc">{</span>r2<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="zusammenfassung" class="slide level2">
 <h2>Zusammenfassung</h2>
@@ -316,6 +316,7 @@ Noah &amp; David
 <h2>Vielen Dank für die Aufmerksamkeit!</h2>
 <p><strong>Gibt es noch Fragen?</strong></p>
 
+
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -325,20 +326,20 @@ Noah &amp; David
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="02Praesentation_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="02Praesentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="02Praesentation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="02Praesentation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="02Praesentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="02Praesentation_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="02Praesentation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="02Praesentation_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="02Praesentation_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="02Praesentation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="02Praesentation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

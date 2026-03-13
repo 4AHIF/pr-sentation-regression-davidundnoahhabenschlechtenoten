@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "02Praesentation.html#was-ist-die-lineare-einfachregression",
+    "href": "02Praesentation.html#was-ist-die-lineare-einfachregression",
+    "title": "Lineare Einfachregression",
+    "section": "Was ist die Lineare Einfachregression?",
+    "text": "Was ist die Lineare Einfachregression?\nEine statistische Methode, um die Beziehung zwischen zwei Variablen zu modellieren.\n\n\n\\(X\\) (Unabhängige Variable): Der Prädiktor (Ursache / Eingabe)\n\\(Y\\) (Abhängige Variable): Das Kriterium (Wirkung / Ausgabe)\nZiel: Eine Gerade finden, die den Trend der Daten bestmöglich beschreibt."
+  },
+  {
+    "objectID": "02Praesentation.html#die-mathematische-intuition",
+    "href": "02Praesentation.html#die-mathematische-intuition",
+    "title": "Lineare Einfachregression",
+    "section": "Die Mathematische Intuition",
+    "text": "Die Mathematische Intuition\nDie grundlegende Gleichung einer Geraden lautet:\n\\[ Y = \\beta_0 + \\beta_1 X + \\epsilon \\]\n\n\n\\(\\beta_0\\): Y-Achsenabschnitt (Intercept) - Wo schneidet die Gerade die Y-Achse?\n\\(\\beta_1\\): Steigung (Slope) - Wie stark ändert sich \\(Y\\), wenn \\(X\\) um 1 steigt?\n\\(\\epsilon\\): Fehlerterm (Residuen) - Die Abweichung der echten Daten von unserer Geraden."
+  },
+  {
+    "objectID": "02Praesentation.html#methode-der-kleinsten-quadrate-ols",
+    "href": "02Praesentation.html#methode-der-kleinsten-quadrate-ols",
+    "title": "Lineare Einfachregression",
+    "section": "Methode der kleinsten Quadrate (OLS)",
+    "text": "Methode der kleinsten Quadrate (OLS)\nWie findet der Algorithmus die “perfekte” Linie?\n\nEr minimiert die Summe der quadrierten Abweichungen zwischen den echten Punkten (\\(y_i\\)) und der Vorhersage der Geraden (\\(\\hat{y}_i\\)).\n\\[ \\min \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2 \\]\nDadurch werden große Ausreißer stärker bestraft!"
+  },
+  {
+    "objectID": "02Praesentation.html#code-daten-vorbereiten",
+    "href": "02Praesentation.html#code-daten-vorbereiten",
+    "title": "Lineare Einfachregression",
+    "section": "Code: Daten vorbereiten",
+    "text": "Code: Daten vorbereiten\nLass uns das in Python mit scikit-learn umsetzen. (Klicke weiter, um die einzelnen Schritte im Code zu markieren!)\n# 1. Bibliotheken importieren\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import LinearRegression\n\n# 2. Beispieldaten generieren\n# X muss für scikit-learn ein 2D-Array sein!\nX = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)\ny = np.array([2.1, 3.8, 5.2, 7.1, 8.9])"
+  },
+  {
+    "objectID": "02Praesentation.html#code-modell-trainieren",
+    "href": "02Praesentation.html#code-modell-trainieren",
+    "title": "Lineare Einfachregression",
+    "section": "Code: Modell trainieren",
+    "text": "Code: Modell trainieren\nNun bauen wir das Regressionsmodell. Jeder Klick zeigt einen neuen logischen Schritt.\n# 1. Modell instanziieren\nmodel = LinearRegression()\n\n# 2. Modell mit unseren Daten trainieren\nmodel.fit(X, y)\n\n# 3. Vorhersagen (die Gerade) berechnen\ny_pred = model.predict(X)\n\n# 4. Die gelernten Parameter auslesen\nprint(f\"Steigung (beta_1): {model.coef_[0]:.2f}\")\nprint(f\"Y-Achsenabschnitt (beta_0): {model.intercept_:.2f}\")"
+  },
+  {
+    "objectID": "02Praesentation.html#code-visualisierung",
+    "href": "02Praesentation.html#code-visualisierung",
+    "title": "Lineare Einfachregression",
+    "section": "Code: Visualisierung",
+    "text": "Code: Visualisierung\nWie plotten wir die Ergebnisse ansprechend?\n# Echte Datenpunkte als Scatterplot\nplt.scatter(X, y, color='cyan', label='Echte Daten')\n\n# Die berechnete Regressionsgerade\nplt.plot(X, y_pred, color='magenta', linewidth=3, label='Regression')\n\n# Achsenbeschriftungen und Titel\nplt.xlabel('Unabhängige Variable (X)')\nplt.ylabel('Abhängige Variable (Y)')\nplt.title('Unsere erste lineare Regression')\n\n# Legende anzeigen und Plot generieren\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "02Praesentation.html#modellbewertung-ist-die-gerade-gut",
+    "href": "02Praesentation.html#modellbewertung-ist-die-gerade-gut",
+    "title": "Lineare Einfachregression",
+    "section": "Modellbewertung: Ist die Gerade gut?",
+    "text": "Modellbewertung: Ist die Gerade gut?\nUm zu messen, wie gut unser Modell ist, nutzen wir oft das Bestimmtheitsmaß \\(R^2\\)."
+  },
+  {
+    "objectID": "02Praesentation.html#code",
+    "href": "02Praesentation.html#code",
+    "title": "Lineare Einfachregression",
+    "section": "Code",
+    "text": "Code\n\n\\(R^2\\) gibt an, wie viel Prozent der Streuung von \\(Y\\) durch \\(X\\) erklärt werden.\nWertebereich: \\(0 \\le R^2 \\le 1\\) (Je näher an 1, desto besser!)\n\n# r2_score Funktion importieren\nfrom sklearn.metrics import r2_score\n\n# R-Quadrat berechnen und ausgeben\nr2 = r2_score(y, y_pred)\nprint(f\"Bestimmtheitsmaß R^2: {r2:.3f}\")"
+  },
+  {
+    "objectID": "02Praesentation.html#zusammenfassung",
+    "href": "02Praesentation.html#zusammenfassung",
+    "title": "Lineare Einfachregression",
+    "section": "Zusammenfassung",
+    "text": "Zusammenfassung\n\nZweck: Lineare Zusammenhänge zwischen zwei Variablen erkennen und für Vorhersagen nutzen.\nMathematik: Suche nach der Geraden, die die Fehlerquadrate minimiert (OLS).\nPraxis: Mit Python (scikit-learn) reichen wenige Zeilen: model.fit() und model.predict().\nEvaluation: Optisch (Plot) und statistisch (z.B. \\(R^2\\)) prüfen."
+  },
+  {
+    "objectID": "02Praesentation.html#vielen-dank-für-die-aufmerksamkeit",
+    "href": "02Praesentation.html#vielen-dank-für-die-aufmerksamkeit",
+    "title": "Lineare Einfachregression",
+    "section": "Vielen Dank für die Aufmerksamkeit!",
+    "text": "Vielen Dank für die Aufmerksamkeit!\nGibt es noch Fragen?"
+  }
+]
