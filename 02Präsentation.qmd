@@ -1,0 +1,157 @@
+---
+title: "Lineare Einfachregression"
+subtitle: "Konzepte, Mathematik & Implementierung in Python"
+author: "Noah & David"
+date: today
+format:
+  revealjs:
+    theme: night       
+    transition: slide    
+    slide-number: true   
+    chalkboard: true     
+    highlight-style: monokai
+---
+
+## Was ist die Lineare Einfachregression? {auto-animate="true"}
+
+Eine statistische Methode, um die Beziehung zwischen **zwei** Variablen zu modellieren.
+
+<br>
+
+::: {.incremental}
+- **$X$ (Unabhängige Variable):** Der Prädiktor (Ursache / Eingabe)
+- **$Y$ (Abhängige Variable):** Das Kriterium (Wirkung / Ausgabe)
+- **Ziel:** Eine Gerade finden, die den Trend der Daten bestmöglich beschreibt.
+:::
+
+---
+
+## Die Mathematische Intuition {auto-animate="true"}
+
+Die grundlegende Gleichung einer Geraden lautet:
+
+$$ Y = \beta_0 + \beta_1 X + \epsilon $$
+
+<br>
+
+::: {.incremental}
+- $\beta_0$: **Y-Achsenabschnitt** (Intercept) - Wo schneidet die Gerade die Y-Achse?
+- $\beta_1$: **Steigung** (Slope) - Wie stark ändert sich $Y$, wenn $X$ um 1 steigt?
+- $\epsilon$: **Fehlerterm** (Residuen) - Die Abweichung der echten Daten von unserer Geraden.
+:::
+
+---
+
+## Methode der kleinsten Quadrate (OLS)
+
+Wie findet der Algorithmus die "perfekte" Linie?
+
+. . .
+
+Er minimiert die Summe der quadrierten Abweichungen zwischen den echten Punkten ($y_i$) und der Vorhersage der Geraden ($\hat{y}_i$).
+
+$$ \min \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 $$
+
+Dadurch werden große Ausreißer stärker bestraft!
+
+---
+
+## Code: Daten vorbereiten
+
+Lass uns das in Python mit `scikit-learn` umsetzen.
+*(Klicke weiter, um die einzelnen Schritte im Code zu markieren!)*
+
+```{.python code-line-numbers="1-2|4-6|8-10"}
+# 1. Bibliotheken importieren
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# 2. Beispieldaten generieren
+# X muss für scikit-learn ein 2D-Array sein!
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+y = np.array([2.1, 3.8, 5.2, 7.1, 8.9])
+```
+
+---
+
+## Code: Modell trainieren
+
+Nun bauen wir das Regressionsmodell. Jeder Klick zeigt einen neuen logischen Schritt.
+
+```{.python code-line-numbers="1-2|4-5|7-8|10-12"}
+# 1. Modell instanziieren
+model = LinearRegression()
+
+# 2. Modell mit unseren Daten trainieren
+model.fit(X, y)
+
+# 3. Vorhersagen (die Gerade) berechnen
+y_pred = model.predict(X)
+
+# 4. Die gelernten Parameter auslesen
+print(f"Steigung (beta_1): {model.coef_[0]:.2f}")
+print(f"Y-Achsenabschnitt (beta_0): {model.intercept_:.2f}")
+```
+
+---
+
+## Code: Visualisierung
+
+Wie plotten wir die Ergebnisse ansprechend? 
+
+```{.python code-line-numbers="1-2|4-5|7-10|12-13"}
+# Echte Datenpunkte als Scatterplot
+plt.scatter(X, y, color='cyan', label='Echte Daten')
+
+# Die berechnete Regressionsgerade
+plt.plot(X, y_pred, color='magenta', linewidth=3, label='Regression')
+
+# Achsenbeschriftungen und Titel
+plt.xlabel('Unabhängige Variable (X)')
+plt.ylabel('Abhängige Variable (Y)')
+plt.title('Unsere erste lineare Regression')
+
+# Legende anzeigen und Plot generieren
+plt.legend()
+plt.show()
+```
+
+---
+
+## Modellbewertung: Ist die Gerade gut?
+
+Um zu messen, wie gut unser Modell ist, nutzen wir oft das **Bestimmtheitsmaß $R^2$**.
+
+## Code
+
+- $R^2$ gibt an, wie viel Prozent der Streuung von $Y$ durch $X$ erklärt werden.
+- **Wertebereich:** $0 \le R^2 \le 1$ (Je näher an 1, desto besser!)
+
+```{.python code-line-numbers="1-2|4-5"}
+# r2_score Funktion importieren
+from sklearn.metrics import r2_score
+
+# R-Quadrat berechnen und ausgeben
+r2 = r2_score(y, y_pred)
+print(f"Bestimmtheitsmaß R^2: {r2:.3f}")
+```
+
+---
+
+## Zusammenfassung
+
+::: {.incremental}
+1. **Zweck:** Lineare Zusammenhänge zwischen zwei Variablen erkennen und für Vorhersagen nutzen.
+2. **Mathematik:** Suche nach der Geraden, die die Fehlerquadrate minimiert (OLS).
+3. **Praxis:** Mit Python (`scikit-learn`) reichen wenige Zeilen: `model.fit()` und `model.predict()`.
+4. **Evaluation:** Optisch (Plot) und statistisch (z.B. $R^2$) prüfen.
+:::
+
+---
+
+## Vielen Dank für die Aufmerksamkeit!
+
+**Gibt es noch Fragen?**
+
+
