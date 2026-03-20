@@ -56,6 +56,97 @@ Dadurch werden große Ausreißer stärker bestraft!
 
 ---
 
+## OLS visuell: Punkte, Linie und Residuen
+
+Die gestrichelten Linien zeigen die **Residuen** $e_i = y_i - \hat{y}_i$.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+X_vis = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+y_vis = np.array([3.4, 2.5, 6.6, 5.8, 10.1])
+
+model_vis = LinearRegression()
+model_vis.fit(X_vis, y_vis)
+y_pred_vis = model_vis.predict(X_vis)
+
+plt.figure(figsize=(8, 5))
+plt.gca().set_facecolor('white')
+plt.scatter(X_vis, y_vis, color='black', s=160, label='Echte Daten')
+plt.plot(X_vis, y_pred_vis, color='magenta', linewidth=3, label='OLS-Gerade')
+
+for xi, yi, yhi in zip(X_vis.flatten(), y_vis, y_pred_vis):
+  plt.plot([xi, xi], [yi, yhi], linestyle='--', color='dimgray', linewidth=2.2, alpha=0.95)
+
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Residuen als vertikale Abstände zur Regressionsgeraden')
+plt.legend()
+plt.grid(alpha=0.2)
+plt.show()
+```
+
+---
+
+## OLS visuell: Was wird minimiert?
+
+OLS minimiert die Summe der quadrierten Residuen:
+
+$$ SSE = \sum_{i=1}^{n} e_i^2 = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2 $$
+
+```{python}
+residuals = y_vis - y_pred_vis
+squared_residuals = residuals**2
+
+print("Residuen:", np.round(residuals, 3))
+print("Quadrate:", np.round(squared_residuals, 3))
+print(f"SSE = {squared_residuals.sum():.3f}")
+```
+
+**Warum quadrieren?**
+
+- Vorzeichen heben sich nicht auf.
+- Große Fehler zählen überproportional stark.
+
+---
+
+## OLS visuell: Schlechte Linie vs. beste Linie
+
+Links eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade.
+
+```{python}
+bad_intercept = 0.5
+bad_slope = 1.2
+bad_pred = bad_intercept + bad_slope * X_vis.flatten()
+
+bad_sse = np.sum((y_vis - bad_pred) ** 2)
+ols_sse = np.sum((y_vis - y_pred_vis) ** 2)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=True)
+
+axes[0].set_facecolor('white')
+axes[0].scatter(X_vis, y_vis, color='black', s=140)
+axes[0].plot(X_vis, bad_pred, color='orange', linewidth=3)
+axes[0].set_title(f'Schlechte Linie (SSE = {bad_sse:.2f})')
+axes[0].set_xlabel('X')
+axes[0].set_ylabel('Y')
+axes[0].grid(alpha=0.2)
+
+axes[1].set_facecolor('white')
+axes[1].scatter(X_vis, y_vis, color='black', s=140)
+axes[1].plot(X_vis, y_pred_vis, color='magenta', linewidth=3)
+axes[1].set_title(f'OLS-Linie (SSE = {ols_sse:.2f})')
+axes[1].set_xlabel('X')
+axes[1].grid(alpha=0.2)
+
+plt.tight_layout()
+plt.show()
+```
+
+---
+
 ## Code: Daten vorbereiten
 
 Lass uns das in Python mit `scikit-learn` umsetzen.
@@ -102,7 +193,7 @@ Wie plotten wir die Ergebnisse ansprechend?
 
 ```{.python code-line-numbers="1-2|4-5|7-10|12-13"}
 # Echte Datenpunkte als Scatterplot
-plt.scatter(X, y, color='cyan', label='Echte Daten')
+plt.scatter(X, y, color='black', s=130, label='Echte Daten')
 
 # Die berechnete Regressionsgerade
 plt.plot(X, y_pred, color='magenta', linewidth=3, label='Regression')
