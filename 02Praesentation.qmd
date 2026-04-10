@@ -5,7 +5,7 @@ author: "Noah & David"
 date: today
 format:
   revealjs:
-    theme: night       
+    theme: beige       
     transition: slide    
     slide-number: true   
     chalkboard: true     
