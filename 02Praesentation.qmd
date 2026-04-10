@@ -85,6 +85,51 @@ $$d = \bar{y} - k \cdot \bar{x}$$
 
 ---
 
+## In Python
+
+```{.python}
+def kovarianz(x, y):
+  n = len(x)
+
+  mittelwert_x = sum(x) / n
+  mittelwert_y = sum(y) / n
+  
+  kov = sum((xi - mittelwert_x) * (yi - mittelwert_y) \ 
+    for xi, yi in zip(x, y)) / (n - 1)
+  return kov
+
+def varianz(daten):
+    n = len(daten)
+
+    mittelwert = sum(daten) / n
+    var = sum((x - mittelwert) ** 2 for x in daten) / (n - 1)
+    return var
+```
+
+```{python}
+def kovarianz(x, y):
+  n = len(x)
+
+  mittelwert_x = sum(x) / n
+  mittelwert_y = sum(y) / n
+  
+  kov = sum((xi - mittelwert_x) * (yi - mittelwert_y) for xi, yi in zip(x, y)) / (n - 1)
+  return kov
+
+def varianz(daten):
+    n = len(daten)
+
+    mittelwert = sum(daten) / n
+    var = sum((x - mittelwert) ** 2 for x in daten) / (n - 1)  # Stichprobenvarianz
+    return var
+
+print("Kovarianz:", kovarianz([1, 2, 3, 4, 5], [3.4, 2.5, 6.6, 5.8, 10.1]))
+print("Varianz:", varianz([1, 2, 3, 4, 5]))
+
+```
+
+---
+
 ## OLS visuell: Schlechte Linie vs. beste Linie
 
 Links eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade.
@@ -166,8 +211,8 @@ model.fit(X, y)
 y_pred = model.predict(X)
 
 # 4. Die gelernten Parameter auslesen
-print(f"Steigung (beta_1): {model.coef_[0]:.2f}")
-print(f"Y-Achsenabschnitt (beta_0): {model.intercept_:.2f}")
+print(f"Steigung: {model.coef_[0]:.2f}")
+print(f"Y-Achsenabschnitt: {model.intercept_:.2f}")
 ```
 
 ---
@@ -177,6 +222,49 @@ print(f"Y-Achsenabschnitt (beta_0): {model.intercept_:.2f}")
 Ergebnis Plotten
 
 ```{.python code-line-numbers="1-2|4-5|7-10|12-13"}
+# Echte Datenpunkte als Scatterplot
+plt.scatter(X, y, color='black', s=130, label='Echte Daten')
+
+# Die berechnete Regressionsgerade
+plt.plot(X, y_pred, color='magenta', linewidth=3, label='Regression')
+
+# Achsenbeschriftungen und Titel
+plt.xlabel('Unabhängige Variable (X)')
+plt.ylabel('Abhängige Variable (Y)')
+plt.title('Unsere erste lineare Regression')
+
+# Legende anzeigen und Plot generieren
+plt.legend()
+plt.show()
+```
+
+## Ergebnis
+
+
+```{python}
+# 1. Bibliotheken importieren
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# 2. Beispieldaten generieren
+# X muss für scikit-learn ein 2D-Array sein!
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+y = np.array([2.1, 3.8, 5.2, 7.1, 8.9])
+
+# 1. Modell instanziieren
+model = LinearRegression()
+
+# 2. Modell mit unseren Daten trainieren
+model.fit(X, y)
+
+# 3. Vorhersagen (die Gerade) berechnen
+y_pred = model.predict(X)
+
+# 4. Die gelernten Parameter auslesen
+print(f"Steigung: {model.coef_[0]:.2f}")
+print(f"Y-Achsenabschnitt: {model.intercept_:.2f}")
+
 # Echte Datenpunkte als Scatterplot
 plt.scatter(X, y, color='black', s=130, label='Echte Daten')
 

@@ -35,6 +35,13 @@
     "text": "3. Die Mathematik dahinter\nStatistische Kennzahlen um auf die Parameter zu kommen \\(f(x) = k \\cdot x + d\\):\nSteigung \\(k\\) (Anstieg pro Einheit)\n\\[k = \\frac{s_{xy}}{s_x^2} \\quad \\frac{\\text{Kovarianz}}{\\text{Varianz von } x}\\]\nAchsenabschnitt \\(d\\) (Startwert)\n\\[d = \\bar{y} - k \\cdot \\bar{x}\\]"
   },
   {
+    "objectID": "02Praesentation.html#in-python",
+    "href": "02Praesentation.html#in-python",
+    "title": "Lineare Einfachregression",
+    "section": "In Python",
+    "text": "In Python\ndef kovarianz(x, y):\n  n = len(x)\n\n  mittelwert_x = sum(x) / n\n  mittelwert_y = sum(y) / n\n  \n  kov = sum((xi - mittelwert_x) * (yi - mittelwert_y) \\ \n    for xi, yi in zip(x, y)) / (n - 1)\n  return kov\n\ndef varianz(daten):\n    n = len(daten)\n\n    mittelwert = sum(daten) / n\n    var = sum((x - mittelwert) ** 2 for x in daten) / (n - 1)\n    return var\n\n\nKovarianz: 4.175\nVarianz: 2.5"
+  },
+  {
     "objectID": "02Praesentation.html#ols-visuell-schlechte-linie-vs.-beste-linie",
     "href": "02Praesentation.html#ols-visuell-schlechte-linie-vs.-beste-linie",
     "title": "Lineare Einfachregression",
@@ -60,7 +67,7 @@
     "href": "02Praesentation.html#code-modell-trainieren",
     "title": "Lineare Einfachregression",
     "section": "Code: Modell trainieren",
-    "text": "Code: Modell trainieren\nRegressionmodell bauen\n# 1. Modell instanziieren\nmodel = LinearRegression()\n\n# 2. Modell mit unseren Daten trainieren\nmodel.fit(X, y)\n\n# 3. Vorhersagen (die Gerade) berechnen\ny_pred = model.predict(X)\n\n# 4. Die gelernten Parameter auslesen\nprint(f\"Steigung (beta_1): {model.coef_[0]:.2f}\")\nprint(f\"Y-Achsenabschnitt (beta_0): {model.intercept_:.2f}\")"
+    "text": "Code: Modell trainieren\nRegressionmodell bauen\n# 1. Modell instanziieren\nmodel = LinearRegression()\n\n# 2. Modell mit unseren Daten trainieren\nmodel.fit(X, y)\n\n# 3. Vorhersagen (die Gerade) berechnen\ny_pred = model.predict(X)\n\n# 4. Die gelernten Parameter auslesen\nprint(f\"Steigung: {model.coef_[0]:.2f}\")\nprint(f\"Y-Achsenabschnitt: {model.intercept_:.2f}\")"
   },
   {
     "objectID": "02Praesentation.html#code-visualisierung",
@@ -68,6 +75,13 @@
     "title": "Lineare Einfachregression",
     "section": "Code: Visualisierung",
     "text": "Code: Visualisierung\nErgebnis Plotten\n# Echte Datenpunkte als Scatterplot\nplt.scatter(X, y, color='black', s=130, label='Echte Daten')\n\n# Die berechnete Regressionsgerade\nplt.plot(X, y_pred, color='magenta', linewidth=3, label='Regression')\n\n# Achsenbeschriftungen und Titel\nplt.xlabel('Unabhängige Variable (X)')\nplt.ylabel('Abhängige Variable (Y)')\nplt.title('Unsere erste lineare Regression')\n\n# Legende anzeigen und Plot generieren\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "02Praesentation.html#ergebnis",
+    "href": "02Praesentation.html#ergebnis",
+    "title": "Lineare Einfachregression",
+    "section": "Ergebnis",
+    "text": "Ergebnis\n\n\nSteigung: 1.69\nY-Achsenabschnitt: 0.35"
   },
   {
     "objectID": "02Praesentation.html#zusammenfassung",
