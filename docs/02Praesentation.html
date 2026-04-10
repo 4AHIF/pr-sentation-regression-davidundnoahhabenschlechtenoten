@@ -218,6 +218,10 @@ Noah &amp; David
 <li><strong>Nutzen:</strong> Vorhersagen treffen .</li>
 </ul>
 </section>
+<section id="einfach-lineare-regression-vs-lineare-regression" class="slide level2">
+<h2>Einfach lineare Regression vs Lineare Regression</h2>
+<p>Einfachregression: eine klärende Variable (x) zb. Alter Regression: mehrere klärende Variablen (x1, x2, x3) zb. Alter, Einkommen, Bildung</p>
+</section>
 <section id="das-konzept-kleinste-quadrate-ols" class="slide level2">
 <h2>2. Das Konzept: Kleinste Quadrate (OLS)</h2>
 <p>Wie definieren wir “die beste” Gerade? Wir minimieren die Fehler.</p>
@@ -230,7 +234,7 @@ Noah &amp; David
 <section id="visualisierung-der-residuen" class="slide level2">
 <h2>Visualisierung der Residuen</h2>
 <p>Die grauen gestrichelten Linien zeigen die Abweichungen, die das Modell minimiert.</p>
-<div id="5a0b5add" class="cell" data-execution_count="1">
+<div id="233501f3" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -247,6 +251,19 @@ Noah &amp; David
 <p><span class="math display">\[k = \frac{s_{xy}}{s_x^2} \quad \frac{\text{Kovarianz}}{\text{Varianz von } x}\]</span></p>
 <h5 id="achsenabschnitt-d-startwert">Achsenabschnitt <span class="math inline">\(d\)</span> (Startwert)</h5>
 <p><span class="math display">\[d = \bar{y} - k \cdot \bar{x}\]</span></p>
+</section>
+<section id="ols-visuell-schlechte-linie-vs.-beste-linie" class="slide level2">
+<h2>OLS visuell: Schlechte Linie vs.&nbsp;beste Linie</h2>
+<p>Links eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade.</p>
+<div id="258b7068" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="02Praesentation_files/figure-revealjs/cell-3-output-1.png" width="1142" height="374"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="die-qualität-korrelation-r" class="slide level2">
 <h2>4. Die Qualität: Korrelation <span class="math inline">\(r\)</span></h2>

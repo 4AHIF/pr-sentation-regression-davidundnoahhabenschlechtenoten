@@ -7,6 +7,13 @@
     "text": "1. Die Problemstellung: Trends erkennen\nIn der Realität liegen Datenpunkte selten exakt auf einer Linie. Wir suchen trotzdem Ordnung im Chaos.\n\nGegeben: Datenpaare \\((x_i, y_i)\\).\nZiel: Eine Gerade \\(f(x) = k \\cdot x + d\\), die den Trend “am besten” beschreibt.\nNutzen: Vorhersagen treffen ."
   },
   {
+    "objectID": "02Praesentation.html#einfach-lineare-regression-vs-lineare-regression",
+    "href": "02Praesentation.html#einfach-lineare-regression-vs-lineare-regression",
+    "title": "Lineare Einfachregression",
+    "section": "Einfach lineare Regression vs Lineare Regression",
+    "text": "Einfach lineare Regression vs Lineare Regression\nEinfachregression: eine klärende Variable (x) zb. Alter Regression: mehrere klärende Variablen (x1, x2, x3) zb. Alter, Einkommen, Bildung"
+  },
+  {
     "objectID": "02Praesentation.html#das-konzept-kleinste-quadrate-ols",
     "href": "02Praesentation.html#das-konzept-kleinste-quadrate-ols",
     "title": "Lineare Einfachregression",
@@ -26,6 +33,13 @@
     "title": "Lineare Einfachregression",
     "section": "3. Die Mathematik dahinter",
     "text": "3. Die Mathematik dahinter\nStatistische Kennzahlen um auf die Parameter zu kommen \\(f(x) = k \\cdot x + d\\):\nSteigung \\(k\\) (Anstieg pro Einheit)\n\\[k = \\frac{s_{xy}}{s_x^2} \\quad \\frac{\\text{Kovarianz}}{\\text{Varianz von } x}\\]\nAchsenabschnitt \\(d\\) (Startwert)\n\\[d = \\bar{y} - k \\cdot \\bar{x}\\]"
+  },
+  {
+    "objectID": "02Praesentation.html#ols-visuell-schlechte-linie-vs.-beste-linie",
+    "href": "02Praesentation.html#ols-visuell-schlechte-linie-vs.-beste-linie",
+    "title": "Lineare Einfachregression",
+    "section": "OLS visuell: Schlechte Linie vs. beste Linie",
+    "text": "OLS visuell: Schlechte Linie vs. beste Linie\nLinks eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade."
   },
   {
     "objectID": "02Praesentation.html#die-qualität-korrelation-r",

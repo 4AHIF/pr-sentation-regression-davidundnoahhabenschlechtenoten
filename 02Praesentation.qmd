@@ -22,6 +22,14 @@ In der Realität liegen Datenpunkte selten exakt auf einer Linie. Wir suchen tro
 
 ---
 
+
+## Einfach lineare Regression vs Lineare Regression
+
+Einfachregression: eine klärende Variable (x) zb. Alter
+Regression: mehrere klärende Variablen (x1, x2, x3) zb. Alter, Einkommen, Bildung
+
+---
+
 ## 2. Das Konzept: Kleinste Quadrate (OLS)
 
 Wie definieren wir "die beste" Gerade? Wir minimieren die Fehler.
@@ -74,6 +82,41 @@ $$k = \frac{s_{xy}}{s_x^2} \quad \frac{\text{Kovarianz}}{\text{Varianz von } x}$
 
 ##### Achsenabschnitt $d$ (Startwert)
 $$d = \bar{y} - k \cdot \bar{x}$$
+
+---
+
+## OLS visuell: Schlechte Linie vs. beste Linie
+
+Links eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade.
+
+```{python}
+bad_intercept = 0.5
+bad_slope = 1.2
+bad_pred = bad_intercept + bad_slope * X_vis.flatten()
+
+bad_sse = np.sum((y_vis - bad_pred) ** 2)
+ols_sse = np.sum((y_vis - y_pred_vis) ** 2)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=True)
+
+axes[0].set_facecolor('white')
+axes[0].scatter(X_vis, y_vis, color='black', s=140)
+axes[0].plot(X_vis, bad_pred, color='orange', linewidth=3)
+axes[0].set_title(f'Schlechte Linie (SSE = {bad_sse:.2f})')
+axes[0].set_xlabel('X')
+axes[0].set_ylabel('Y')
+axes[0].grid(alpha=0.2)
+
+axes[1].set_facecolor('white')
+axes[1].scatter(X_vis, y_vis, color='black', s=140)
+axes[1].plot(X_vis, y_pred_vis, color='magenta', linewidth=3)
+axes[1].set_title(f'OLS-Linie (SSE = {ols_sse:.2f})')
+axes[1].set_xlabel('X')
+axes[1].grid(alpha=0.2)
+
+plt.tight_layout()
+plt.show()
+```
 
 ---
 
