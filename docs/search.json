@@ -46,7 +46,7 @@
     "href": "02Praesentation.html#code-daten-vorbereiten",
     "title": "Lineare Einfachregression",
     "section": "Code: Daten vorbereiten",
-    "text": "Code: Daten vorbereiten\nLass uns das in Python mit scikit-learn umsetzen. (Klicke weiter, um die einzelnen Schritte im Code zu markieren!)\n# 1. Bibliotheken importieren\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import LinearRegression\n\n# 2. Beispieldaten generieren\n# X muss für scikit-learn ein 2D-Array sein!\nX = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)\ny = np.array([2.1, 3.8, 5.2, 7.1, 8.9])"
+    "text": "Code: Daten vorbereiten\nLass uns das in Python mit scikit-learn umsetzen.\n# 1. Bibliotheken importieren\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import LinearRegression\n\n# 2. Beispieldaten generieren\n# X muss für scikit-learn ein 2D-Array sein!\nX = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)\ny = np.array([2.1, 3.8, 5.2, 7.1, 8.9])"
   },
   {
     "objectID": "02Praesentation.html#code-modell-trainieren",

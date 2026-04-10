@@ -150,7 +150,6 @@ plt.show()
 ## Code: Daten vorbereiten
 
 Lass uns das in Python mit `scikit-learn` umsetzen.
-*(Klicke weiter, um die einzelnen Schritte im Code zu markieren!)*
 
 ```{.python code-line-numbers="1-2|4-6|8-10"}
 # 1. Bibliotheken importieren
