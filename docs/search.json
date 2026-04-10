@@ -11,7 +11,7 @@
     "href": "02Praesentation.html#die-mathematische-intuition",
     "title": "Lineare Einfachregression",
     "section": "Die Mathematische Intuition",
-    "text": "Die Mathematische Intuition\nDie grundlegende Gleichung einer Geraden lautet:\n\\[ Y = \\beta_0 + \\beta_1 X + \\epsilon \\]\n\n\n\\(\\beta_0\\): Y-Achsenabschnitt (Intercept) - Wo schneidet die Gerade die Y-Achse?\n\\(\\beta_1\\): Steigung (Slope) - Wie stark ändert sich \\(Y\\), wenn \\(X\\) um 1 steigt?\n\\(\\epsilon\\): Fehlerterm (Residuen) - Die Abweichung der echten Daten von unserer Geraden."
+    "text": "Die Mathematische Intuition\nDie grundlegende Gleichung einer Geraden lautet:\n\\[ Y = d + k X + \\epsilon \\]\n\n\n\\(d\\): Y-Achsenabschnitt (Intercept) - Wo schneidet die Gerade die Y-Achse?\n\\(k\\): Steigung (Slope) - Wie stark ändert sich \\(Y\\), wenn \\(X\\) um 1 steigt?\n\\(\\epsilon\\): Fehlerterm (Residuen) - Die Abweichung der echten Daten von unserer Geraden."
   },
   {
     "objectID": "02Praesentation.html#methode-der-kleinsten-quadrate-ols",
@@ -46,21 +46,21 @@
     "href": "02Praesentation.html#code-daten-vorbereiten",
     "title": "Lineare Einfachregression",
     "section": "Code: Daten vorbereiten",
-    "text": "Code: Daten vorbereiten\nLass uns das in Python mit scikit-learn umsetzen.\n# 1. Bibliotheken importieren\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import LinearRegression\n\n# 2. Beispieldaten generieren\n# X muss für scikit-learn ein 2D-Array sein!\nX = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)\ny = np.array([2.1, 3.8, 5.2, 7.1, 8.9])"
+    "text": "Code: Daten vorbereiten\nskikit-learn\n# 1. Bibliotheken importieren\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import LinearRegression\n\n# 2. Beispieldaten generieren\n# X muss für scikit-learn ein 2D-Array sein!\nX = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)\ny = np.array([2.1, 3.8, 5.2, 7.1, 8.9])"
   },
   {
     "objectID": "02Praesentation.html#code-modell-trainieren",
     "href": "02Praesentation.html#code-modell-trainieren",
     "title": "Lineare Einfachregression",
     "section": "Code: Modell trainieren",
-    "text": "Code: Modell trainieren\nNun bauen wir das Regressionsmodell. Jeder Klick zeigt einen neuen logischen Schritt.\n# 1. Modell instanziieren\nmodel = LinearRegression()\n\n# 2. Modell mit unseren Daten trainieren\nmodel.fit(X, y)\n\n# 3. Vorhersagen (die Gerade) berechnen\ny_pred = model.predict(X)\n\n# 4. Die gelernten Parameter auslesen\nprint(f\"Steigung (beta_1): {model.coef_[0]:.2f}\")\nprint(f\"Y-Achsenabschnitt (beta_0): {model.intercept_:.2f}\")"
+    "text": "Code: Modell trainieren\nRegressionmodell bauen\n# 1. Modell instanziieren\nmodel = LinearRegression()\n\n# 2. Modell mit unseren Daten trainieren\nmodel.fit(X, y)\n\n# 3. Vorhersagen (die Gerade) berechnen\ny_pred = model.predict(X)\n\n# 4. Die gelernten Parameter auslesen\nprint(f\"Steigung (beta_1): {model.coef_[0]:.2f}\")\nprint(f\"Y-Achsenabschnitt (beta_0): {model.intercept_:.2f}\")"
   },
   {
     "objectID": "02Praesentation.html#code-visualisierung",
     "href": "02Praesentation.html#code-visualisierung",
     "title": "Lineare Einfachregression",
     "section": "Code: Visualisierung",
-    "text": "Code: Visualisierung\nWie plotten wir die Ergebnisse ansprechend?\n# Echte Datenpunkte als Scatterplot\nplt.scatter(X, y, color='black', s=130, label='Echte Daten')\n\n# Die berechnete Regressionsgerade\nplt.plot(X, y_pred, color='magenta', linewidth=3, label='Regression')\n\n# Achsenbeschriftungen und Titel\nplt.xlabel('Unabhängige Variable (X)')\nplt.ylabel('Abhängige Variable (Y)')\nplt.title('Unsere erste lineare Regression')\n\n# Legende anzeigen und Plot generieren\nplt.legend()\nplt.show()"
+    "text": "Code: Visualisierung\nErgebnis Plotten\n# Echte Datenpunkte als Scatterplot\nplt.scatter(X, y, color='black', s=130, label='Echte Daten')\n\n# Die berechnete Regressionsgerade\nplt.plot(X, y_pred, color='magenta', linewidth=3, label='Regression')\n\n# Achsenbeschriftungen und Titel\nplt.xlabel('Unabhängige Variable (X)')\nplt.ylabel('Abhängige Variable (Y)')\nplt.title('Unsere erste lineare Regression')\n\n# Legende anzeigen und Plot generieren\nplt.legend()\nplt.show()"
   },
   {
     "objectID": "02Praesentation.html#modellbewertung-ist-die-gerade-gut",
