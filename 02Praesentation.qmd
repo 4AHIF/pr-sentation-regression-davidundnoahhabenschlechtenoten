@@ -174,7 +174,13 @@ Wie sehr kann man der Geraden trauen?
   - $r = -1$: Perfekter negativer Zusammenhang.
   - $r \approx 0$: Kein linearer Trend.
 
+--- 
+
+## 4. Die Qualität: Bestimmtheit $R^2$
+
 - **Bestimmtheitsmaß ($R^2$):** Gibt an, wie viel Prozent der Streuung von $Y$ durch das Modell erklärt werden (0 bis 1).
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/R2values.svg/500px-R2values.svg.png)
 
 ---
 

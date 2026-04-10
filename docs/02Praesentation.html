@@ -234,7 +234,7 @@ Noah &amp; David
 <section id="visualisierung-der-residuen" class="slide level2">
 <h2>Visualisierung der Residuen</h2>
 <p>Die grauen gestrichelten Linien zeigen die Abweichungen, die das Modell minimiert.</p>
-<div id="84b23953" class="cell" data-execution_count="1">
+<div id="d55c83af" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -270,7 +270,7 @@ Noah &amp; David
 <span id="cb1-14"><a></a>    mittelwert <span class="op">=</span> <span class="bu">sum</span>(daten) <span class="op">/</span> n</span>
 <span id="cb1-15"><a></a>    var <span class="op">=</span> <span class="bu">sum</span>((x <span class="op">-</span> mittelwert) <span class="op">**</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> daten) <span class="op">/</span> (n <span class="op">-</span> <span class="dv">1</span>)</span>
 <span id="cb1-16"><a></a>    <span class="cf">return</span> var</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="85fab1ea" class="cell" data-execution_count="2">
+<div id="9d3ca8a6" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>Kovarianz: 4.175
 Varianz: 2.5</code></pre>
@@ -280,7 +280,7 @@ Varianz: 2.5</code></pre>
 <section id="ols-visuell-schlechte-linie-vs.-beste-linie" class="slide level2">
 <h2>OLS visuell: Schlechte Linie vs.&nbsp;beste Linie</h2>
 <p>Links eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade.</p>
-<div id="4ad4a1a4" class="cell" data-execution_count="3">
+<div id="47cc63ff" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -300,9 +300,15 @@ Varianz: 2.5</code></pre>
 <li><span class="math inline">\(r = -1\)</span>: Perfekter negativer Zusammenhang.</li>
 <li><span class="math inline">\(r \approx 0\)</span>: Kein linearer Trend.</li>
 </ul></li>
-<li><strong>Bestimmtheitsmaß (<span class="math inline">\(R^2\)</span>):</strong> Gibt an, wie viel Prozent der Streuung von <span class="math inline">\(Y\)</span> durch das Modell erklärt werden (0 bis 1).</li>
 </ul>
 </section>
+<section id="die-qualität-bestimmtheit-r2" class="slide level2">
+<h2>4. Die Qualität: Bestimmtheit <span class="math inline">\(R^2\)</span></h2>
+<ul>
+<li><strong>Bestimmtheitsmaß (<span class="math inline">\(R^2\)</span>):</strong> Gibt an, wie viel Prozent der Streuung von <span class="math inline">\(Y\)</span> durch das Modell erklärt werden (0 bis 1).</li>
+</ul>
+
+<img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/R2values.svg/500px-R2values.svg.png" class="r-stretch"></section>
 <section id="code-daten-vorbereiten" class="slide level2">
 <h2>Code: Daten vorbereiten</h2>
 <p><code>skikit-learn</code></p>
@@ -352,7 +358,7 @@ Varianz: 2.5</code></pre>
 </section>
 <section id="ergebnis" class="slide level2">
 <h2>Ergebnis</h2>
-<div id="a9f84f16" class="cell" data-execution_count="4">
+<div id="ba569f57" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
 <pre><code>Steigung: 1.69
 Y-Achsenabschnitt: 0.35</code></pre>

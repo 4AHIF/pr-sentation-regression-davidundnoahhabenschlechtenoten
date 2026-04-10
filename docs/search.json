@@ -53,7 +53,14 @@
     "href": "02Praesentation.html#die-qualität-korrelation-r",
     "title": "Lineare Einfachregression",
     "section": "4. Die Qualität: Korrelation \\(r\\)",
-    "text": "4. Die Qualität: Korrelation \\(r\\)\nWie sehr kann man der Geraden trauen?\n\nPearson-Korrelation (\\(r\\)):\n\n\\(r = 1\\): Perfekter positiver Zusammenhang.\n\\(r = -1\\): Perfekter negativer Zusammenhang.\n\\(r \\approx 0\\): Kein linearer Trend.\n\nBestimmtheitsmaß (\\(R^2\\)): Gibt an, wie viel Prozent der Streuung von \\(Y\\) durch das Modell erklärt werden (0 bis 1)."
+    "text": "4. Die Qualität: Korrelation \\(r\\)\nWie sehr kann man der Geraden trauen?\n\nPearson-Korrelation (\\(r\\)):\n\n\\(r = 1\\): Perfekter positiver Zusammenhang.\n\\(r = -1\\): Perfekter negativer Zusammenhang.\n\\(r \\approx 0\\): Kein linearer Trend."
+  },
+  {
+    "objectID": "02Praesentation.html#die-qualität-bestimmtheit-r2",
+    "href": "02Praesentation.html#die-qualität-bestimmtheit-r2",
+    "title": "Lineare Einfachregression",
+    "section": "4. Die Qualität: Bestimmtheit \\(R^2\\)",
+    "text": "4. Die Qualität: Bestimmtheit \\(R^2\\)\n\nBestimmtheitsmaß (\\(R^2\\)): Gibt an, wie viel Prozent der Streuung von \\(Y\\) durch das Modell erklärt werden (0 bis 1)."
   },
   {
     "objectID": "02Praesentation.html#code-daten-vorbereiten",
