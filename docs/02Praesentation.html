@@ -197,7 +197,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Lineare Einfachregression</h1>
-  <p class="subtitle">Konzepte, Mathematik &amp; Implementierung in Python</p>
+  <p class="subtitle">Vom Datenpunkt zur Vorhersage</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -209,155 +209,117 @@ Noah &amp; David
 
   <p class="date">2026-04-10</p>
 </section>
-<section id="was-ist-die-lineare-einfachregression" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Was ist die Lineare Einfachregression?</h2>
-<p>Eine statistische Methode, um die Beziehung zwischen <strong>zwei</strong> Variablen zu modellieren.</p>
-<p><br></p>
+<section id="die-problemstellung-trends-erkennen" class="slide level2">
+<h2>1. Die Problemstellung: Trends erkennen</h2>
+<p>In der Realität liegen Datenpunkte selten exakt auf einer Linie. Wir suchen trotzdem Ordnung im Chaos.</p>
 <ul>
-<li class="fragment"><strong><span class="math inline">\(X\)</span> (Unabhängige Variable):</strong> Der Prädiktor (Ursache / Eingabe)</li>
-<li class="fragment"><strong><span class="math inline">\(Y\)</span> (Abhängige Variable):</strong> Das Kriterium (Wirkung / Ausgabe)</li>
-<li class="fragment"><strong>Ziel:</strong> Eine Gerade finden, die den Trend der Daten bestmöglich beschreibt.</li>
+<li><strong>Gegeben:</strong> Datenpaare <span class="math inline">\((x_i, y_i)\)</span>.</li>
+<li><strong>Ziel:</strong> Eine Gerade <span class="math inline">\(f(x) = k \cdot x + d\)</span>, die den Trend “am besten” beschreibt.</li>
+<li><strong>Nutzen:</strong> Vorhersagen treffen .</li>
 </ul>
 </section>
-<section id="die-mathematische-intuition" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Die Mathematische Intuition</h2>
-<p>Die grundlegende Gleichung einer Geraden lautet:</p>
-<p><span class="math display">\[ Y = d + k X + \epsilon \]</span></p>
-<p><br></p>
+<section id="das-konzept-kleinste-quadrate-ols" class="slide level2">
+<h2>2. Das Konzept: Kleinste Quadrate (OLS)</h2>
+<p>Wie definieren wir “die beste” Gerade? Wir minimieren die Fehler.</p>
 <ul>
-<li class="fragment"><span class="math inline">\(d\)</span>: <strong>Y-Achsenabschnitt</strong> (Intercept) - Wo schneidet die Gerade die Y-Achse?</li>
-<li class="fragment"><span class="math inline">\(k\)</span>: <strong>Steigung</strong> (Slope) - Wie stark ändert sich <span class="math inline">\(Y\)</span>, wenn <span class="math inline">\(X\)</span> um 1 steigt?</li>
-<li class="fragment"><span class="math inline">\(\epsilon\)</span>: <strong>Fehlerterm</strong> (Residuen) - Die Abweichung der echten Daten von unserer Geraden.</li>
+<li><strong>Residuen (<span class="math inline">\(e_i\)</span>):</strong> Der vertikale Abstand zwischen Messpunkt und Gerade.</li>
+<li>Positive und negative Fehler heben auf, große Abweichungen werden bestraft durch die Quadrate</li>
 </ul>
+<p><span class="math display">\[\sum_{i=1}^{n} (y_i - (k \cdot x_i + d))^2 \to \min\]</span></p>
 </section>
-<section id="methode-der-kleinsten-quadrate-ols" class="slide level2">
-<h2>Methode der kleinsten Quadrate (OLS)</h2>
-<p>Wie findet der Algorithmus die “perfekte” Linie?</p>
-<div class="fragment">
-<p>Er minimiert die Summe der quadrierten Abweichungen zwischen den echten Punkten (<span class="math inline">\(y_i\)</span>) und der Vorhersage der Geraden (<span class="math inline">\(\hat{y}_i\)</span>).</p>
-<p><span class="math display">\[ \min \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \]</span></p>
-<p>Dadurch werden große Ausreißer stärker bestraft!</p>
-</div>
-</section>
-<section id="ols-visuell-punkte-linie-und-residuen" class="slide level2">
-<h2>OLS visuell: Punkte, Linie und Residuen</h2>
-<p>Die gestrichelten Linien zeigen die <strong>Residuen</strong> <span class="math inline">\(e_i = y_i - \hat{y}_i\)</span>.</p>
-<div id="2a29d92e" class="cell" data-execution_count="1">
+<section id="visualisierung-der-residuen" class="slide level2">
+<h2>Visualisierung der Residuen</h2>
+<p>Die grauen gestrichelten Linien zeigen die Abweichungen, die das Modell minimiert.</p>
+<div id="5a0b5add" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="02Praesentation_files/figure-revealjs/cell-2-output-1.png" width="659" height="449"></p>
+<p><img data-src="02Praesentation_files/figure-revealjs/cell-2-output-1.png" width="659" height="429"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="ols-visuell-was-wird-minimiert" class="slide level2">
-<h2>OLS visuell: Was wird minimiert?</h2>
-<p>OLS minimiert die Summe der quadrierten Residuen:</p>
-<p><span class="math display">\[ SSE = \sum_{i=1}^{n} e_i^2 = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2 \]</span></p>
-<div id="6905d577" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-stdout">
-<pre><code>Residuen: [ 1.06 -1.51  0.92 -1.55  1.08]
-Quadrate: [1.124 2.28  0.846 2.402 1.166]
-SSE = 7.819</code></pre>
-</div>
-</div>
-<p><strong>Warum quadrieren?</strong></p>
-<ul>
-<li>Vorzeichen heben sich nicht auf.</li>
-<li>Große Fehler zählen überproportional stark.</li>
-</ul>
+<section id="die-mathematik-dahinter" class="slide level2">
+<h2>3. Die Mathematik dahinter</h2>
+<p>Statistische Kennzahlen um auf die Parameter zu kommen <span class="math inline">\(f(x) = k \cdot x + d\)</span>:</p>
+<h5 id="steigung-k-anstieg-pro-einheit">Steigung <span class="math inline">\(k\)</span> (Anstieg pro Einheit)</h5>
+<p><span class="math display">\[k = \frac{s_{xy}}{s_x^2} \quad \frac{\text{Kovarianz}}{\text{Varianz von } x}\]</span></p>
+<h5 id="achsenabschnitt-d-startwert">Achsenabschnitt <span class="math inline">\(d\)</span> (Startwert)</h5>
+<p><span class="math display">\[d = \bar{y} - k \cdot \bar{x}\]</span></p>
 </section>
-<section id="ols-visuell-schlechte-linie-vs.-beste-linie" class="slide level2">
-<h2>OLS visuell: Schlechte Linie vs.&nbsp;beste Linie</h2>
-<p>Links eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade.</p>
-<div id="d8fc0212" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="02Praesentation_files/figure-revealjs/cell-4-output-1.png" width="1142" height="374"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="die-qualität-korrelation-r" class="slide level2">
+<h2>4. Die Qualität: Korrelation <span class="math inline">\(r\)</span></h2>
+<p>Wie sehr kann man der Geraden trauen?</p>
+<ul>
+<li><strong>Pearson-Korrelation (<span class="math inline">\(r\)</span>):</strong>
+<ul>
+<li><span class="math inline">\(r = 1\)</span>: Perfekter positiver Zusammenhang.</li>
+<li><span class="math inline">\(r = -1\)</span>: Perfekter negativer Zusammenhang.</li>
+<li><span class="math inline">\(r \approx 0\)</span>: Kein linearer Trend.</li>
+</ul></li>
+<li><strong>Bestimmtheitsmaß (<span class="math inline">\(R^2\)</span>):</strong> Gibt an, wie viel Prozent der Streuung von <span class="math inline">\(Y\)</span> durch das Modell erklärt werden (0 bis 1).</li>
+</ul>
 </section>
 <section id="code-daten-vorbereiten" class="slide level2">
 <h2>Code: Daten vorbereiten</h2>
 <p><code>skikit-learn</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-line-numbers="1-2|4-6|8-10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># 1. Bibliotheken importieren</span></span>
-<span id="cb2-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-3"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-4"><a></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="co"># 2. Beispieldaten generieren</span></span>
-<span id="cb2-7"><a></a><span class="co"># X muss für scikit-learn ein 2D-Array sein!</span></span>
-<span id="cb2-8"><a></a>X <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb2-9"><a></a>y <span class="op">=</span> np.array([<span class="fl">2.1</span>, <span class="fl">3.8</span>, <span class="fl">5.2</span>, <span class="fl">7.1</span>, <span class="fl">8.9</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-line-numbers="1-2|4-6|8-10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># 1. Bibliotheken importieren</span></span>
+<span id="cb1-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a><span class="co"># 2. Beispieldaten generieren</span></span>
+<span id="cb1-7"><a></a><span class="co"># X muss für scikit-learn ein 2D-Array sein!</span></span>
+<span id="cb1-8"><a></a>X <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb1-9"><a></a>y <span class="op">=</span> np.array([<span class="fl">2.1</span>, <span class="fl">3.8</span>, <span class="fl">5.2</span>, <span class="fl">7.1</span>, <span class="fl">8.9</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="code-modell-trainieren" class="slide level2">
 <h2>Code: Modell trainieren</h2>
 <p>Regressionmodell bauen</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-line-numbers="1-2|4-5|7-8|10-12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># 1. Modell instanziieren</span></span>
-<span id="cb3-2"><a></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb3-3"><a></a></span>
-<span id="cb3-4"><a></a><span class="co"># 2. Modell mit unseren Daten trainieren</span></span>
-<span id="cb3-5"><a></a>model.fit(X, y)</span>
-<span id="cb3-6"><a></a></span>
-<span id="cb3-7"><a></a><span class="co"># 3. Vorhersagen (die Gerade) berechnen</span></span>
-<span id="cb3-8"><a></a>y_pred <span class="op">=</span> model.predict(X)</span>
-<span id="cb3-9"><a></a></span>
-<span id="cb3-10"><a></a><span class="co"># 4. Die gelernten Parameter auslesen</span></span>
-<span id="cb3-11"><a></a><span class="bu">print</span>(<span class="ss">f"Steigung (beta_1): </span><span class="sc">{</span>model<span class="sc">.</span>coef_[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb3-12"><a></a><span class="bu">print</span>(<span class="ss">f"Y-Achsenabschnitt (beta_0): </span><span class="sc">{</span>model<span class="sc">.</span>intercept_<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-line-numbers="1-2|4-5|7-8|10-12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># 1. Modell instanziieren</span></span>
+<span id="cb2-2"><a></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="co"># 2. Modell mit unseren Daten trainieren</span></span>
+<span id="cb2-5"><a></a>model.fit(X, y)</span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a><span class="co"># 3. Vorhersagen (die Gerade) berechnen</span></span>
+<span id="cb2-8"><a></a>y_pred <span class="op">=</span> model.predict(X)</span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a><span class="co"># 4. Die gelernten Parameter auslesen</span></span>
+<span id="cb2-11"><a></a><span class="bu">print</span>(<span class="ss">f"Steigung (beta_1): </span><span class="sc">{</span>model<span class="sc">.</span>coef_[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb2-12"><a></a><span class="bu">print</span>(<span class="ss">f"Y-Achsenabschnitt (beta_0): </span><span class="sc">{</span>model<span class="sc">.</span>intercept_<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="code-visualisierung" class="slide level2">
 <h2>Code: Visualisierung</h2>
 <p>Ergebnis Plotten</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-code-line-numbers="1-2|4-5|7-10|12-13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Echte Datenpunkte als Scatterplot</span></span>
-<span id="cb4-2"><a></a>plt.scatter(X, y, color<span class="op">=</span><span class="st">'black'</span>, s<span class="op">=</span><span class="dv">130</span>, label<span class="op">=</span><span class="st">'Echte Daten'</span>)</span>
-<span id="cb4-3"><a></a></span>
-<span id="cb4-4"><a></a><span class="co"># Die berechnete Regressionsgerade</span></span>
-<span id="cb4-5"><a></a>plt.plot(X, y_pred, color<span class="op">=</span><span class="st">'magenta'</span>, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Regression'</span>)</span>
-<span id="cb4-6"><a></a></span>
-<span id="cb4-7"><a></a><span class="co"># Achsenbeschriftungen und Titel</span></span>
-<span id="cb4-8"><a></a>plt.xlabel(<span class="st">'Unabhängige Variable (X)'</span>)</span>
-<span id="cb4-9"><a></a>plt.ylabel(<span class="st">'Abhängige Variable (Y)'</span>)</span>
-<span id="cb4-10"><a></a>plt.title(<span class="st">'Unsere erste lineare Regression'</span>)</span>
-<span id="cb4-11"><a></a></span>
-<span id="cb4-12"><a></a><span class="co"># Legende anzeigen und Plot generieren</span></span>
-<span id="cb4-13"><a></a>plt.legend()</span>
-<span id="cb4-14"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="modellbewertung-ist-die-gerade-gut" class="slide level2">
-<h2>Modellbewertung: Ist die Gerade gut?</h2>
-<p>Um zu messen, wie gut unser Modell ist, nutzen wir oft das <strong>Bestimmtheitsmaß <span class="math inline">\(R^2\)</span></strong>.</p>
-</section>
-<section id="code" class="slide level2">
-<h2>Code</h2>
-<ul>
-<li><span class="math inline">\(R^2\)</span> gibt an, wie viel Prozent der Streuung von <span class="math inline">\(Y\)</span> durch <span class="math inline">\(X\)</span> erklärt werden.</li>
-<li><strong>Wertebereich:</strong> <span class="math inline">\(0 \le R^2 \le 1\)</span> (Je näher an 1, desto besser!)</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-code-line-numbers="1-2|4-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># r2_score Funktion importieren</span></span>
-<span id="cb5-2"><a></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
-<span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a><span class="co"># R-Quadrat berechnen und ausgeben</span></span>
-<span id="cb5-5"><a></a>r2 <span class="op">=</span> r2_score(y, y_pred)</span>
-<span id="cb5-6"><a></a><span class="bu">print</span>(<span class="ss">f"Bestimmtheitsmaß R^2: </span><span class="sc">{</span>r2<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-line-numbers="1-2|4-5|7-10|12-13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Echte Datenpunkte als Scatterplot</span></span>
+<span id="cb3-2"><a></a>plt.scatter(X, y, color<span class="op">=</span><span class="st">'black'</span>, s<span class="op">=</span><span class="dv">130</span>, label<span class="op">=</span><span class="st">'Echte Daten'</span>)</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a><span class="co"># Die berechnete Regressionsgerade</span></span>
+<span id="cb3-5"><a></a>plt.plot(X, y_pred, color<span class="op">=</span><span class="st">'magenta'</span>, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Regression'</span>)</span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a><span class="co"># Achsenbeschriftungen und Titel</span></span>
+<span id="cb3-8"><a></a>plt.xlabel(<span class="st">'Unabhängige Variable (X)'</span>)</span>
+<span id="cb3-9"><a></a>plt.ylabel(<span class="st">'Abhängige Variable (Y)'</span>)</span>
+<span id="cb3-10"><a></a>plt.title(<span class="st">'Unsere erste lineare Regression'</span>)</span>
+<span id="cb3-11"><a></a></span>
+<span id="cb3-12"><a></a><span class="co"># Legende anzeigen und Plot generieren</span></span>
+<span id="cb3-13"><a></a>plt.legend()</span>
+<span id="cb3-14"><a></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="zusammenfassung" class="slide level2">
-<h2>Zusammenfassung</h2>
+<h2>6. Zusammenfassung</h2>
 <ol type="1">
-<li class="fragment"><strong>Zweck:</strong> Lineare Zusammenhänge zwischen zwei Variablen erkennen und für Vorhersagen nutzen.</li>
-<li class="fragment"><strong>Mathematik:</strong> Suche nach der Geraden, die die Fehlerquadrate minimiert (OLS).</li>
-<li class="fragment"><strong>Praxis:</strong> Mit Python (<code>scikit-learn</code>) reichen wenige Zeilen: <code>model.fit()</code> und <code>model.predict()</code>.</li>
-<li class="fragment"><strong>Evaluation:</strong> Optisch (Plot) und statistisch (z.B. <span class="math inline">\(R^2\)</span>) prüfen.</li>
+<li class="fragment"><strong>Beobachten:</strong> Daten im Scatterplot auf linearen Trend prüfen.</li>
+<li class="fragment"><strong>Minimieren:</strong> Die OLS-Gerade finden (kleinste Fehlerquadrate).</li>
+<li class="fragment"><strong>Bewerten:</strong> Mit <span class="math inline">\(R^2\)</span> und <span class="math inline">\(r\)</span> die Verlässlichkeit prüfen.</li>
+<li class="fragment"><strong>Anwenden:</strong> Unbekannte Werte prognostizieren.</li>
 </ol>
 </section>
-<section id="vielen-dank-für-die-aufmerksamkeit" class="slide level2">
-<h2>Vielen Dank für die Aufmerksamkeit!</h2>
-<p><strong>Gibt es noch Fragen?</strong></p>
+<section id="vielen-dank-für-eure-aufmerksamkeit" class="slide level2">
+<h2>Vielen Dank für eure Aufmerksamkeit!</h2>
+<p><strong>Gibt es noch Fragen zur Regression?</strong></p>
 
 
 </section>

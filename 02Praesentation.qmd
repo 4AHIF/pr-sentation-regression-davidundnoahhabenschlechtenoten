@@ -1,6 +1,6 @@
 ---
 title: "Lineare Einfachregression"
-subtitle: "Konzepte, Mathematik & Implementierung in Python"
+subtitle: "Vom Datenpunkt zur Vorhersage"
 author: "Noah & David"
 date: today
 format:
@@ -12,53 +12,30 @@ format:
     highlight-style: monokai
 ---
 
-## Was ist die Lineare Einfachregression? {auto-animate="true"}
+## 1. Die Problemstellung: Trends erkennen
 
-Eine statistische Methode, um die Beziehung zwischen **zwei** Variablen zu modellieren.
+In der Realität liegen Datenpunkte selten exakt auf einer Linie. Wir suchen trotzdem Ordnung im Chaos.
 
-<br>
-
-::: {.incremental}
-- **$X$ (Unabhängige Variable):** Der Prädiktor (Ursache / Eingabe)
-- **$Y$ (Abhängige Variable):** Das Kriterium (Wirkung / Ausgabe)
-- **Ziel:** Eine Gerade finden, die den Trend der Daten bestmöglich beschreibt.
-:::
+- **Gegeben:** Datenpaare $(x_i, y_i)$.
+- **Ziel:** Eine Gerade $f(x) = k \cdot x + d$, die den Trend "am besten" beschreibt.
+- **Nutzen:** Vorhersagen treffen .
 
 ---
 
-## Die Mathematische Intuition {auto-animate="true"}
+## 2. Das Konzept: Kleinste Quadrate (OLS)
 
-Die grundlegende Gleichung einer Geraden lautet:
+Wie definieren wir "die beste" Gerade? Wir minimieren die Fehler.
 
-$$ Y = d + k X + \epsilon $$
+- **Residuen ($e_i$):** Der vertikale Abstand zwischen Messpunkt und Gerade.
+- Positive und negative Fehler heben auf, große Abweichungen werden bestraft durch die Quadrate
 
-<br>
-
-::: {.incremental}
-- $d$: **Y-Achsenabschnitt** (Intercept) - Wo schneidet die Gerade die Y-Achse?
-- $k$: **Steigung** (Slope) - Wie stark ändert sich $Y$, wenn $X$ um 1 steigt?
-- $\epsilon$: **Fehlerterm** (Residuen) - Die Abweichung der echten Daten von unserer Geraden.
-:::
+$$\sum_{i=1}^{n} (y_i - (k \cdot x_i + d))^2 \to \min$$
 
 ---
 
-## Methode der kleinsten Quadrate (OLS)
+## Visualisierung der Residuen
 
-Wie findet der Algorithmus die "perfekte" Linie?
-
-. . .
-
-Er minimiert die Summe der quadrierten Abweichungen zwischen den echten Punkten ($y_i$) und der Vorhersage der Geraden ($\hat{y}_i$).
-
-$$ \min \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 $$
-
-Dadurch werden große Ausreißer stärker bestraft!
-
----
-
-## OLS visuell: Punkte, Linie und Residuen
-
-Die gestrichelten Linien zeigen die **Residuen** $e_i = y_i - \hat{y}_i$.
+Die grauen gestrichelten Linien zeigen die Abweichungen, die das Modell minimiert.
 
 ```{python}
 import numpy as np
@@ -68,21 +45,19 @@ from sklearn.linear_model import LinearRegression
 X_vis = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
 y_vis = np.array([3.4, 2.5, 6.6, 5.8, 10.1])
 
-model_vis = LinearRegression()
-model_vis.fit(X_vis, y_vis)
+model_vis = LinearRegression().fit(X_vis, y_vis)
 y_pred_vis = model_vis.predict(X_vis)
 
 plt.figure(figsize=(8, 5))
 plt.gca().set_facecolor('white')
 plt.scatter(X_vis, y_vis, color='black', s=160, label='Echte Daten')
-plt.plot(X_vis, y_pred_vis, color='magenta', linewidth=3, label='OLS-Gerade')
+plt.plot(X_vis, y_pred_vis, color='magenta', linewidth=3, label='Optimale Gerade (OLS)')
 
 for xi, yi, yhi in zip(X_vis.flatten(), y_vis, y_pred_vis):
-  plt.plot([xi, xi], [yi, yhi], linestyle='--', color='dimgray', linewidth=2.2, alpha=0.95)
+    plt.plot([xi, xi], [yi, yhi], linestyle='--', color='dimgray', linewidth=2)
 
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.title('Residuen als vertikale Abstände zur Regressionsgeraden')
+plt.xlabel('X (Unabhängig)')
+plt.ylabel('Y (Abhängig)')
 plt.legend()
 plt.grid(alpha=0.2)
 plt.show()
@@ -90,60 +65,28 @@ plt.show()
 
 ---
 
-## OLS visuell: Was wird minimiert?
+## 3. Die Mathematik dahinter
 
-OLS minimiert die Summe der quadrierten Residuen:
+Statistische Kennzahlen um auf die Parameter zu kommen $f(x) = k \cdot x + d$:
 
-$$ SSE = \sum_{i=1}^{n} e_i^2 = \sum_{i=1}^{n}(y_i-\hat{y}_i)^2 $$
+##### Steigung $k$ (Anstieg pro Einheit)
+$$k = \frac{s_{xy}}{s_x^2} \quad \frac{\text{Kovarianz}}{\text{Varianz von } x}$$
 
-```{python}
-residuals = y_vis - y_pred_vis
-squared_residuals = residuals**2
-
-print("Residuen:", np.round(residuals, 3))
-print("Quadrate:", np.round(squared_residuals, 3))
-print(f"SSE = {squared_residuals.sum():.3f}")
-```
-
-**Warum quadrieren?**
-
-- Vorzeichen heben sich nicht auf.
-- Große Fehler zählen überproportional stark.
+##### Achsenabschnitt $d$ (Startwert)
+$$d = \bar{y} - k \cdot \bar{x}$$
 
 ---
 
-## OLS visuell: Schlechte Linie vs. beste Linie
+## 4. Die Qualität: Korrelation $r$
 
-Links eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade.
+Wie sehr kann man der Geraden trauen?
 
-```{python}
-bad_intercept = 0.5
-bad_slope = 1.2
-bad_pred = bad_intercept + bad_slope * X_vis.flatten()
+- **Pearson-Korrelation ($r$):**
+  - $r = 1$: Perfekter positiver Zusammenhang.
+  - $r = -1$: Perfekter negativer Zusammenhang.
+  - $r \approx 0$: Kein linearer Trend.
 
-bad_sse = np.sum((y_vis - bad_pred) ** 2)
-ols_sse = np.sum((y_vis - y_pred_vis) ** 2)
-
-fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=True)
-
-axes[0].set_facecolor('white')
-axes[0].scatter(X_vis, y_vis, color='black', s=140)
-axes[0].plot(X_vis, bad_pred, color='orange', linewidth=3)
-axes[0].set_title(f'Schlechte Linie (SSE = {bad_sse:.2f})')
-axes[0].set_xlabel('X')
-axes[0].set_ylabel('Y')
-axes[0].grid(alpha=0.2)
-
-axes[1].set_facecolor('white')
-axes[1].scatter(X_vis, y_vis, color='black', s=140)
-axes[1].plot(X_vis, y_pred_vis, color='magenta', linewidth=3)
-axes[1].set_title(f'OLS-Linie (SSE = {ols_sse:.2f})')
-axes[1].set_xlabel('X')
-axes[1].grid(alpha=0.2)
-
-plt.tight_layout()
-plt.show()
-```
+- **Bestimmtheitsmaß ($R^2$):** Gibt an, wie viel Prozent der Streuung von $Y$ durch das Modell erklärt werden (0 bis 1).
 
 ---
 
@@ -209,39 +152,17 @@ plt.show()
 
 ---
 
-## Modellbewertung: Ist die Gerade gut?
-
-Um zu messen, wie gut unser Modell ist, nutzen wir oft das **Bestimmtheitsmaß $R^2$**.
-
-## Code
-
-- $R^2$ gibt an, wie viel Prozent der Streuung von $Y$ durch $X$ erklärt werden.
-- **Wertebereich:** $0 \le R^2 \le 1$ (Je näher an 1, desto besser!)
-
-```{.python code-line-numbers="1-2|4-5"}
-# r2_score Funktion importieren
-from sklearn.metrics import r2_score
-
-# R-Quadrat berechnen und ausgeben
-r2 = r2_score(y, y_pred)
-print(f"Bestimmtheitsmaß R^2: {r2:.3f}")
-```
-
----
-
-## Zusammenfassung
+## 6. Zusammenfassung
 
 ::: {.incremental}
-1. **Zweck:** Lineare Zusammenhänge zwischen zwei Variablen erkennen und für Vorhersagen nutzen.
-2. **Mathematik:** Suche nach der Geraden, die die Fehlerquadrate minimiert (OLS).
-3. **Praxis:** Mit Python (`scikit-learn`) reichen wenige Zeilen: `model.fit()` und `model.predict()`.
-4. **Evaluation:** Optisch (Plot) und statistisch (z.B. $R^2$) prüfen.
+1. **Beobachten:** Daten im Scatterplot auf linearen Trend prüfen.
+2. **Minimieren:** Die OLS-Gerade finden (kleinste Fehlerquadrate).
+3. **Bewerten:** Mit $R^2$ und $r$ die Verlässlichkeit prüfen.
+4. **Anwenden:** Unbekannte Werte prognostizieren.
 :::
 
 ---
 
-## Vielen Dank für die Aufmerksamkeit!
+## Vielen Dank für eure Aufmerksamkeit!
 
-**Gibt es noch Fragen?**
-
-
+**Gibt es noch Fragen zur Regression?**

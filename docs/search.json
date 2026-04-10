@@ -1,45 +1,38 @@
 [
   {
-    "objectID": "02Praesentation.html#was-ist-die-lineare-einfachregression",
-    "href": "02Praesentation.html#was-ist-die-lineare-einfachregression",
+    "objectID": "02Praesentation.html#die-problemstellung-trends-erkennen",
+    "href": "02Praesentation.html#die-problemstellung-trends-erkennen",
     "title": "Lineare Einfachregression",
-    "section": "Was ist die Lineare Einfachregression?",
-    "text": "Was ist die Lineare Einfachregression?\nEine statistische Methode, um die Beziehung zwischen zwei Variablen zu modellieren.\n\n\n\\(X\\) (Unabhängige Variable): Der Prädiktor (Ursache / Eingabe)\n\\(Y\\) (Abhängige Variable): Das Kriterium (Wirkung / Ausgabe)\nZiel: Eine Gerade finden, die den Trend der Daten bestmöglich beschreibt."
+    "section": "1. Die Problemstellung: Trends erkennen",
+    "text": "1. Die Problemstellung: Trends erkennen\nIn der Realität liegen Datenpunkte selten exakt auf einer Linie. Wir suchen trotzdem Ordnung im Chaos.\n\nGegeben: Datenpaare \\((x_i, y_i)\\).\nZiel: Eine Gerade \\(f(x) = k \\cdot x + d\\), die den Trend “am besten” beschreibt.\nNutzen: Vorhersagen treffen ."
   },
   {
-    "objectID": "02Praesentation.html#die-mathematische-intuition",
-    "href": "02Praesentation.html#die-mathematische-intuition",
+    "objectID": "02Praesentation.html#das-konzept-kleinste-quadrate-ols",
+    "href": "02Praesentation.html#das-konzept-kleinste-quadrate-ols",
     "title": "Lineare Einfachregression",
-    "section": "Die Mathematische Intuition",
-    "text": "Die Mathematische Intuition\nDie grundlegende Gleichung einer Geraden lautet:\n\\[ Y = d + k X + \\epsilon \\]\n\n\n\\(d\\): Y-Achsenabschnitt (Intercept) - Wo schneidet die Gerade die Y-Achse?\n\\(k\\): Steigung (Slope) - Wie stark ändert sich \\(Y\\), wenn \\(X\\) um 1 steigt?\n\\(\\epsilon\\): Fehlerterm (Residuen) - Die Abweichung der echten Daten von unserer Geraden."
+    "section": "2. Das Konzept: Kleinste Quadrate (OLS)",
+    "text": "2. Das Konzept: Kleinste Quadrate (OLS)\nWie definieren wir “die beste” Gerade? Wir minimieren die Fehler.\n\nResiduen (\\(e_i\\)): Der vertikale Abstand zwischen Messpunkt und Gerade.\nPositive und negative Fehler heben auf, große Abweichungen werden bestraft durch die Quadrate\n\n\\[\\sum_{i=1}^{n} (y_i - (k \\cdot x_i + d))^2 \\to \\min\\]"
   },
   {
-    "objectID": "02Praesentation.html#methode-der-kleinsten-quadrate-ols",
-    "href": "02Praesentation.html#methode-der-kleinsten-quadrate-ols",
+    "objectID": "02Praesentation.html#visualisierung-der-residuen",
+    "href": "02Praesentation.html#visualisierung-der-residuen",
     "title": "Lineare Einfachregression",
-    "section": "Methode der kleinsten Quadrate (OLS)",
-    "text": "Methode der kleinsten Quadrate (OLS)\nWie findet der Algorithmus die “perfekte” Linie?\n\nEr minimiert die Summe der quadrierten Abweichungen zwischen den echten Punkten (\\(y_i\\)) und der Vorhersage der Geraden (\\(\\hat{y}_i\\)).\n\\[ \\min \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2 \\]\nDadurch werden große Ausreißer stärker bestraft!"
+    "section": "Visualisierung der Residuen",
+    "text": "Visualisierung der Residuen\nDie grauen gestrichelten Linien zeigen die Abweichungen, die das Modell minimiert."
   },
   {
-    "objectID": "02Praesentation.html#ols-visuell-punkte-linie-und-residuen",
-    "href": "02Praesentation.html#ols-visuell-punkte-linie-und-residuen",
+    "objectID": "02Praesentation.html#die-mathematik-dahinter",
+    "href": "02Praesentation.html#die-mathematik-dahinter",
     "title": "Lineare Einfachregression",
-    "section": "OLS visuell: Punkte, Linie und Residuen",
-    "text": "OLS visuell: Punkte, Linie und Residuen\nDie gestrichelten Linien zeigen die Residuen \\(e_i = y_i - \\hat{y}_i\\)."
+    "section": "3. Die Mathematik dahinter",
+    "text": "3. Die Mathematik dahinter\nStatistische Kennzahlen um auf die Parameter zu kommen \\(f(x) = k \\cdot x + d\\):\nSteigung \\(k\\) (Anstieg pro Einheit)\n\\[k = \\frac{s_{xy}}{s_x^2} \\quad \\frac{\\text{Kovarianz}}{\\text{Varianz von } x}\\]\nAchsenabschnitt \\(d\\) (Startwert)\n\\[d = \\bar{y} - k \\cdot \\bar{x}\\]"
   },
   {
-    "objectID": "02Praesentation.html#ols-visuell-was-wird-minimiert",
-    "href": "02Praesentation.html#ols-visuell-was-wird-minimiert",
+    "objectID": "02Praesentation.html#die-qualität-korrelation-r",
+    "href": "02Praesentation.html#die-qualität-korrelation-r",
     "title": "Lineare Einfachregression",
-    "section": "OLS visuell: Was wird minimiert?",
-    "text": "OLS visuell: Was wird minimiert?\nOLS minimiert die Summe der quadrierten Residuen:\n\\[ SSE = \\sum_{i=1}^{n} e_i^2 = \\sum_{i=1}^{n}(y_i-\\hat{y}_i)^2 \\]\n\n\nResiduen: [ 1.06 -1.51  0.92 -1.55  1.08]\nQuadrate: [1.124 2.28  0.846 2.402 1.166]\nSSE = 7.819\n\n\nWarum quadrieren?\n\nVorzeichen heben sich nicht auf.\nGroße Fehler zählen überproportional stark."
-  },
-  {
-    "objectID": "02Praesentation.html#ols-visuell-schlechte-linie-vs.-beste-linie",
-    "href": "02Praesentation.html#ols-visuell-schlechte-linie-vs.-beste-linie",
-    "title": "Lineare Einfachregression",
-    "section": "OLS visuell: Schlechte Linie vs. beste Linie",
-    "text": "OLS visuell: Schlechte Linie vs. beste Linie\nLinks eine bewusst schlechte Gerade, rechts die durch OLS gefundene Gerade."
+    "section": "4. Die Qualität: Korrelation \\(r\\)",
+    "text": "4. Die Qualität: Korrelation \\(r\\)\nWie sehr kann man der Geraden trauen?\n\nPearson-Korrelation (\\(r\\)):\n\n\\(r = 1\\): Perfekter positiver Zusammenhang.\n\\(r = -1\\): Perfekter negativer Zusammenhang.\n\\(r \\approx 0\\): Kein linearer Trend.\n\nBestimmtheitsmaß (\\(R^2\\)): Gibt an, wie viel Prozent der Streuung von \\(Y\\) durch das Modell erklärt werden (0 bis 1)."
   },
   {
     "objectID": "02Praesentation.html#code-daten-vorbereiten",
@@ -63,31 +56,17 @@
     "text": "Code: Visualisierung\nErgebnis Plotten\n# Echte Datenpunkte als Scatterplot\nplt.scatter(X, y, color='black', s=130, label='Echte Daten')\n\n# Die berechnete Regressionsgerade\nplt.plot(X, y_pred, color='magenta', linewidth=3, label='Regression')\n\n# Achsenbeschriftungen und Titel\nplt.xlabel('Unabhängige Variable (X)')\nplt.ylabel('Abhängige Variable (Y)')\nplt.title('Unsere erste lineare Regression')\n\n# Legende anzeigen und Plot generieren\nplt.legend()\nplt.show()"
   },
   {
-    "objectID": "02Praesentation.html#modellbewertung-ist-die-gerade-gut",
-    "href": "02Praesentation.html#modellbewertung-ist-die-gerade-gut",
-    "title": "Lineare Einfachregression",
-    "section": "Modellbewertung: Ist die Gerade gut?",
-    "text": "Modellbewertung: Ist die Gerade gut?\nUm zu messen, wie gut unser Modell ist, nutzen wir oft das Bestimmtheitsmaß \\(R^2\\)."
-  },
-  {
-    "objectID": "02Praesentation.html#code",
-    "href": "02Praesentation.html#code",
-    "title": "Lineare Einfachregression",
-    "section": "Code",
-    "text": "Code\n\n\\(R^2\\) gibt an, wie viel Prozent der Streuung von \\(Y\\) durch \\(X\\) erklärt werden.\nWertebereich: \\(0 \\le R^2 \\le 1\\) (Je näher an 1, desto besser!)\n\n# r2_score Funktion importieren\nfrom sklearn.metrics import r2_score\n\n# R-Quadrat berechnen und ausgeben\nr2 = r2_score(y, y_pred)\nprint(f\"Bestimmtheitsmaß R^2: {r2:.3f}\")"
-  },
-  {
     "objectID": "02Praesentation.html#zusammenfassung",
     "href": "02Praesentation.html#zusammenfassung",
     "title": "Lineare Einfachregression",
-    "section": "Zusammenfassung",
-    "text": "Zusammenfassung\n\nZweck: Lineare Zusammenhänge zwischen zwei Variablen erkennen und für Vorhersagen nutzen.\nMathematik: Suche nach der Geraden, die die Fehlerquadrate minimiert (OLS).\nPraxis: Mit Python (scikit-learn) reichen wenige Zeilen: model.fit() und model.predict().\nEvaluation: Optisch (Plot) und statistisch (z.B. \\(R^2\\)) prüfen."
+    "section": "6. Zusammenfassung",
+    "text": "6. Zusammenfassung\n\nBeobachten: Daten im Scatterplot auf linearen Trend prüfen.\nMinimieren: Die OLS-Gerade finden (kleinste Fehlerquadrate).\nBewerten: Mit \\(R^2\\) und \\(r\\) die Verlässlichkeit prüfen.\nAnwenden: Unbekannte Werte prognostizieren."
   },
   {
-    "objectID": "02Praesentation.html#vielen-dank-für-die-aufmerksamkeit",
-    "href": "02Praesentation.html#vielen-dank-für-die-aufmerksamkeit",
+    "objectID": "02Praesentation.html#vielen-dank-für-eure-aufmerksamkeit",
+    "href": "02Praesentation.html#vielen-dank-für-eure-aufmerksamkeit",
     "title": "Lineare Einfachregression",
-    "section": "Vielen Dank für die Aufmerksamkeit!",
-    "text": "Vielen Dank für die Aufmerksamkeit!\nGibt es noch Fragen?"
+    "section": "Vielen Dank für eure Aufmerksamkeit!",
+    "text": "Vielen Dank für eure Aufmerksamkeit!\nGibt es noch Fragen zur Regression?"
   }
 ]
